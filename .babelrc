@@ -1,0 +1,45 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": [
+            "chrome 60"
+          ]
+        },
+        "modules": false,
+        "loose": true,
+        "debug": false
+      }
+    ],
+    "react"
+  ],
+  "plugins": [
+    ["transform-object-rest-spread"],
+    ["transform-class-properties", { "spec": true }],
+    ["syntax-dynamic-import"]
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        [
+          "transform-react-remove-prop-types",
+          {
+            "mode": "remove",
+            "ignoreFilenames": [
+              "node_modules"
+            ],
+            "removeImport": true
+          }
+        ]
+      ]
+    },
+    "test" : {
+      "plugins": [
+        ["transform-es2015-modules-commonjs"],
+        ["babel-plugin-dynamic-import-node"]
+      ]
+    }
+  }
+}

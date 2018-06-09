@@ -2,3 +2,4 @@
 /yarn-error.log
 .idea/
 /.env
+/dist/
