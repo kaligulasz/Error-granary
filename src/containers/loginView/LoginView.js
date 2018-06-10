@@ -23,6 +23,7 @@ class LoginView extends Component {
   }
 
   submitForm = () => {
+    const thisContext = this;
     axios({
       method: 'post',
       url: '//localhost:3000/api/authenticate',
@@ -33,7 +34,7 @@ class LoginView extends Component {
       config: { headers: {'Content-Type': 'multipart/form-data' }}
     })
       .then(function (response) {
-        console.log(response);
+        thisContext.props.history.push('/');
       })
       .catch(function (error) {
         console.log(error);

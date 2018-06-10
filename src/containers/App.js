@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
 import axios from 'axios';
-import LoginView from './login/Login';
+
+// Components
+import LoginView from './loginView/LoginView';
+import Home from './home/Home';
 
 class App extends Component {
-  componentDidMount() {
-    axios.get('//localhost:3000/api/users')
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
   render() {
     return (
-      <LoginView />
+      <Router>
+        <div className="container">
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={LoginView} />
+        </div>
+      </Router>
     )
   }
 }
