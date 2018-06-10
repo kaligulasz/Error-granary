@@ -6,13 +6,13 @@ import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
 
 class LoginView extends Component {
   state = {
-    login: '',
+    name: '',
     password: '',
   }
 
   handleLoginChange = (event) => {
     this.setState({
-      login: event.target.value,
+      name: event.target.value,
     })
   }
 
@@ -26,12 +26,11 @@ class LoginView extends Component {
     axios({
       method: 'post',
       url: '//localhost:3000/api/authenticate',
-      data: JSON.stringify(this.state),
-      config: {
-        headers: {
-          'Content-type': 'application/x-www-form-urlencoded'
-        }
-      }
+      data: {
+        name: this.state.name,
+        password: this.state.password,
+      },
+      config: { headers: {'Content-Type': 'multipart/form-data' }}
     })
       .then(function (response) {
         console.log(response);

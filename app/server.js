@@ -60,7 +60,7 @@ app.get('/setup', async function(req, res) {
 const apiRoutes = express.Router();
 
 apiRoutes.post('/authenticate', (req, res) => {
-
+  console.log(req.body.name)
   // find the user
   User.findOne({
     name: req.body.name
