@@ -43,8 +43,8 @@ app.get('/setup', async function(req, res) {
   const User = mongoose.model('User');
   // create a sample user
   const newUser = new User({
-    name: 'Nick Cerminara',
-    password: 'password',
+    name: 'admin',
+    password: 'admin',
     admin: true
   });
 

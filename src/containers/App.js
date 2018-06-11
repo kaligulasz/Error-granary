@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   BrowserRouter as Router,
   Route,
   Link
 } from 'react-router-dom';
-import axios from 'axios';
+
+// Actions
+import { loginSuccessful } from '../actions/apiActions';
 
 // Components
 import LoginView from './loginView/LoginView';
 import Home from './home/Home';
 
 class App extends Component {
+  componentDidMount() {
+    const authToken = sessionStorage.getItem('authToken');
+
+    if (authToken) {
+      this.props.onLoginSuccessful(authToken);
+    }
+  }
+
   render() {
     return (
       <Router>
@@ -23,4 +34,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    onLoginSuccessful: loginSuccessful,
+  }
+)(App);

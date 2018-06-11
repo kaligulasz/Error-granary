@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
+
+// actions
+import { fetchErrorListData } from '../../actions/apiActions';
+
+// reducers
+import { getAppStatus } from '../../reducers/apiReducer';
 
 class Home extends Component {
   componentDidMount() {
-    const thisContext = this;
-    axios.get('//localhost:3000/api/users')
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        thisContext.props.history.push('/login');
-      });
+    this.props.onFetchErrorListData();
   }
 
   render() {
@@ -20,4 +20,13 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  appStatus: getAppStatus(state),
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    onFetchErrorListData: fetchErrorListData,
+  }
+)(Home);
