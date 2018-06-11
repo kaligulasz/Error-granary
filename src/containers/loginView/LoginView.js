@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
+
+// Actions
+import { loginAuthentication } from '../../actions/apiActions';
 
 // Components
 import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
@@ -23,22 +27,12 @@ class LoginView extends Component {
   }
 
   submitForm = () => {
-    const thisContext = this;
-    axios({
-      method: 'post',
-      url: '//localhost:3000/api/authenticate',
-      data: {
+    this.props.onLoginAuthentication(
+      {
         name: this.state.name,
         password: this.state.password,
-      },
-      config: { headers: {'Content-Type': 'multipart/form-data' }}
-    })
-      .then(function (response) {
-        thisContext.props.history.push('/');
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      }
+    )
   }
 
   render() {
@@ -79,4 +73,13 @@ class LoginView extends Component {
   }
 }
 
-export default LoginView;
+const mapStateToProps = state => ({
+
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    onLoginAuthentication: loginAuthentication,
+  }
+)(LoginView);
