@@ -40,6 +40,6 @@ const apiData = (state = {
 };
 
 export const getAppStatus = state => state.apiData.appStatus;
-export const getToken = state => state.apiData.token;
+export const getLoginStatus = state => state.apiData.login;
 
 export default apiData;

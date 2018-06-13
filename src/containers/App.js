@@ -1,40 +1,48 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import {
   BrowserRouter as Router,
   Route,
-  Link
 } from 'react-router-dom';
 
 // Actions
 import { loginSuccessful } from '../actions/apiActions';
 
+// Reducers
+import { getLoginStatus } from '../reducers/apiReducer';
+
 // Components
 import LoginView from './loginView/LoginView';
 import Home from './home/Home';
+import MainMenu from '../components/menu/Menu';
+import PrivateRoute from '../components/privateRoute/PrivateRoute';
 
 class App extends Component {
-  componentDidMount() {
+  componentWillMount() {
     const authToken = sessionStorage.getItem('authToken');
 
     if (authToken) {
-      this.props.onLoginSuccessful(authToken);
+      this.props.onLoginSuccessful();
     }
   }
 
   render() {
     return (
-      <Router>
-        <div className="container">
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={LoginView} />
-        </div>
-      </Router>
+      <Fragment>
+        <MainMenu />
+          <Router>
+            <div className="container">
+              <PrivateRoute path='/' component={Home} exact loginStatus={this.props.loginStatus} />
+              <Route path="/login" component={LoginView} />
+            </div>
+          </Router>
+      </Fragment>
     )
   }
 }
 
 const mapStateToProps = state => ({
+  loginStatus: getLoginStatus(state),
 });
 
 export default connect(

@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
+import {
+  Link,
+  withRouter,
+} from 'react-router-dom';
 
 // Actions
 import { loginAuthentication } from '../../actions/apiActions';
+
+// Reducers
+import { getLoginStatus } from '../../reducers/apiReducer';
 
 // Components
 import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
@@ -12,6 +18,12 @@ class LoginView extends Component {
   state = {
     name: '',
     password: '',
+  }
+
+  componentDidMount() {
+    if (this.props.loginStatus) {
+      this.props.history.push('/');
+    }
   }
 
   handleLoginChange = (event) => {
@@ -45,6 +57,7 @@ class LoginView extends Component {
         height: 100%;
       }
     `}</style>
+        <Link to={'/'}>home</Link>
         <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' color='teal' textAlign='center'>
@@ -74,12 +87,12 @@ class LoginView extends Component {
 }
 
 const mapStateToProps = state => ({
-
+  loginStatus: getLoginStatus(state),
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   {
     onLoginAuthentication: loginAuthentication,
   }
-)(LoginView);
+)(LoginView));

@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
+import {
+  withRouter,
+} from 'react-router-dom';
 
-// actions
+// Actions
 import { fetchErrorListData } from '../../actions/apiActions';
 
-// reducers
+// Reducers
 import { getAppStatus } from '../../reducers/apiReducer';
+
+// Components
+import { ErrorList } from '../../components/errorList/ErrorList';
 
 class Home extends Component {
   componentDidMount() {
@@ -15,7 +20,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div>Home</div>
+       <ErrorList />
     )
   }
 }
@@ -24,9 +29,9 @@ const mapStateToProps = state => ({
   appStatus: getAppStatus(state),
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   {
     onFetchErrorListData: fetchErrorListData,
   }
-)(Home);
+)(Home));
