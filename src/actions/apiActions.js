@@ -28,13 +28,9 @@ export const loginFailed = () => ({
   type: LOGIN_FAILED,
 });
 
-
-
-
-
 export const fetchErrorListData = () =>
   (dispatch, getState) => {
-    const token = getToken(getState());
+    const token = sessionStorage.getItem('authToken');
 
     return axios({
       method: 'get',
