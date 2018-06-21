@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-const UserSchema = new mongoose.Schema({
+const UserListSchema = new mongoose.Schema({
   name: String,
   password: String,
-  admin: Boolean
+  admin: Boolean,
 });
 
-UserSchema.pre('save', function (next) {
+UserListSchema.pre('save', function (next) {
   // TO DO: CHECK IF PLAYER EXIST
   next();
 });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserListSchema);

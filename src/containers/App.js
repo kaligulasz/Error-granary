@@ -49,5 +49,5 @@ export default connect(
   mapStateToProps,
   {
     onLoginSuccessful: loginSuccessful,
-  }
+  },
 )(App);
