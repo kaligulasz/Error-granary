@@ -2,8 +2,6 @@ import axios from 'axios';
 
 import { getErrorList } from './errorActions';
 
-import { getToken } from '../reducers/apiReducer';
-
 export const FETCH_DATA_FAILED = 'FETCH_DATA_FAILED';
 export const FETCH_DATA_DONE = 'FETCH_DATA_DONE';
 export const LOGIN_SUCCESSFUL = 'LOGIN_SUCCESSFUL';
@@ -29,25 +27,25 @@ export const loginFailed = () => ({
 });
 
 export const fetchErrorListData = () =>
-  (dispatch, getState) => {
+  (dispatch) => {
     const token = sessionStorage.getItem('authToken');
 
     return axios({
       method: 'get',
-      url: '//localhost:3000/api/users',
+      url: '//localhost:3000/api/issues',
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Headers': 'x-access-token',
         'x-access-token': token,
-      }
+      },
     })
-      .then(function (response) {
+      .then((response) => {
         dispatch(getErrorList(response));
         dispatch(getDataDone(response));
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
-      })
+      });
   };
 
 export const loginAuthentication = (credentials) =>
@@ -59,9 +57,9 @@ export const loginAuthentication = (credentials) =>
         name: credentials.name,
         password: credentials.password,
       },
-      config: { headers: {'Content-Type': 'multipart/form-data' }}
+      config: { headers: {'Content-Type': 'multipart/form-data' } }
     })
-      .then(function (response) {
+      .then((response) => {
         if (response.data.success) {
           dispatch(loginSuccessful(response.data.token));
           sessionStorage.setItem('authToken', response.data.token)
@@ -69,7 +67,7 @@ export const loginAuthentication = (credentials) =>
           dispatch(loginFailed());
         }
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       })
   );

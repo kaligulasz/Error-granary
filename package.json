@@ -43,7 +43,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server",
-    "dev": "nodemon app/server.js",
+    "server": "nodemon app/server.js",
     "build": "echo '=> building' && rm -Rf dist/* && NODE_ENV=production webpack --env.production --progress",
     "lint:js": "echo '=> linting js' && eslint src && eslint app",
     "lint-staged": "lint-staged"
