@@ -1,15 +1,22 @@
 import React from 'react';
-import { Icon, List } from 'semantic-ui-react'
+import { Icon, List } from 'semantic-ui-react';
+import timestampToDate from '../../helpers/helpers';
 
-export const ErrorList = () => (
+const ErrorList = ({ list }) => (
   <List celled>
-    <List.Item as='a'>
-      <Icon name='circle' color='red' />
-      <List.Content>
-        <List.Header>Undefined error</List.Header>
-        <List.Description>some description</List.Description>
-      </List.Content>
-    </List.Item>
+    {list.map(item => (
+      <List.Item as="a" key={item._id}>
+        <Icon name="circle" color="red" />
+        <List.Content floated="left">
+          <List.Header>{item.name}</List.Header>
+          <List.Description>{item.message}</List.Description>
+        </List.Content>
+        <List.Content floated="right">
+          {timestampToDate(item.timestamp)}
+        </List.Content>
+      </List.Item>
+    ))}
   </List>
-)
+);
 
+export default ErrorList;

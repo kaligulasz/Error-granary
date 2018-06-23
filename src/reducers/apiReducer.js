@@ -15,7 +15,7 @@ const apiData = (state = {
     case FETCH_DATA_DONE:
       return {
         ...state,
-        errorList: action.data,
+        errorList: action.payload,
         appStatus: 'successfull',
       };
     case FETCH_DATA_FAILED:
@@ -41,5 +41,6 @@ const apiData = (state = {
 
 export const getAppStatus = state => state.apiData.appStatus;
 export const getLoginStatus = state => state.apiData.login;
+export const getIssueList = state => state.apiData.errorList;
 
 export default apiData;

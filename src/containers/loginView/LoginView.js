@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  Link,
-  withRouter,
-} from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react';
 
 // Actions
 import { loginAuthentication } from '../../actions/apiActions';
 
 // Reducers
 import { getLoginStatus } from '../../reducers/apiReducer';
-
-// Components
-import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
 
 class LoginView extends Component {
   state = {
@@ -29,7 +24,7 @@ class LoginView extends Component {
   handleLoginChange = (event) => {
     this.setState({
       name: event.target.value,
-    })
+    });
   }
 
   handlePasswordChange = (event) => {
@@ -39,12 +34,10 @@ class LoginView extends Component {
   }
 
   submitForm = () => {
-    this.props.onLoginAuthentication(
-      {
-        name: this.state.name,
-        password: this.state.password,
-      }
-    )
+    this.props.onLoginAuthentication({
+      name: this.state.name,
+      password: this.state.password,
+    });
   }
 
   render() {
@@ -94,5 +87,5 @@ export default withRouter(connect(
   mapStateToProps,
   {
     onLoginAuthentication: loginAuthentication,
-  }
+  },
 )(LoginView));
