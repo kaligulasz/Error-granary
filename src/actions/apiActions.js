@@ -7,9 +7,9 @@ export const FETCH_DATA_DONE = 'FETCH_DATA_DONE';
 export const LOGIN_SUCCESSFUL = 'LOGIN_SUCCESSFUL';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
 
-export const getDataDone = data => ({
+export const getDataDone = payload => ({
   type: FETCH_DATA_DONE,
-  data,
+  payload,
 });
 
 export const getDataFailed = error => ({
@@ -40,8 +40,8 @@ export const fetchErrorListData = () =>
       },
     })
       .then((response) => {
-        dispatch(getErrorList(response));
-        dispatch(getDataDone(response));
+        dispatch(getErrorList(response.data));
+        dispatch(getDataDone(response.data));
       })
       .catch((error) => {
         console.log(error);
